@@ -10,7 +10,12 @@ function required(name: string): string {
 
 export const env = {
   get appUrl() {
-    return process.env.APP_URL ?? "http://localhost:3000";
+    // Strip any trailing slash(es) — a stray one here (e.g. "https://x.com/")
+    // would double up when routes append their own path, producing
+    // ".../api/auth/..." with a double slash that Google's exact-match
+    // redirect_uri check rejects.
+    const raw = process.env.APP_URL ?? "http://localhost:3000";
+    return raw.replace(/\/+$/, "");
   },
   get googleClientId() {
     return required("GOOGLE_CLIENT_ID");
