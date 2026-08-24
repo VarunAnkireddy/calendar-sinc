@@ -8,10 +8,13 @@ export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
 /**
- * Polled by Vercel Cron (see vercel.json) every 5 minutes. Vercel
+ * Hit by Vercel Cron once a day (see vercel.json — Hobby plan's limit) as a
+ * safety net, and ideally also by a free external scheduler every few
+ * minutes for real-time-ish alerts (see README's cron section). Vercel
  * automatically sends `Authorization: Bearer $CRON_SECRET` on scheduled
- * invocations when CRON_SECRET is set as an env var, which is what we
- * check below so nobody else can trigger a sync for free.
+ * invocations when CRON_SECRET is set as an env var; an external scheduler
+ * needs that same header set manually. Either way we check it below so
+ * nobody else can trigger a sync for free.
  */
 export async function GET(req: NextRequest) {
   if (env.cronSecret) {

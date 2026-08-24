@@ -23,10 +23,11 @@ This document is for whoever is deploying and maintaining the app, not the end u
   diffs them against the last-seen cache in Postgres, writes a `notification` row for
   every new event, cancelled event, and cross-provider time overlap ("clash"), and sends
   a browser push notification if any of those happened.
-- `src/app/api/cron/sync/route.ts` — polled every 5 minutes by Vercel Cron (`vercel.json`)
-  to run the sync for every user. `src/app/api/sync/route.ts` lets the signed-in user
-  trigger an immediate sync (used by the refresh button and right after connecting a
-  calendar).
+- `src/app/api/cron/sync/route.ts` — the sync endpoint. `vercel.json` hits it once a day
+  as a safety net (Vercel's free plan won't allow more often — see the cron section
+  below for how to get real 5-minute polling anyway). `src/app/api/sync/route.ts` lets
+  the signed-in user trigger an immediate sync (used by the refresh button and right
+  after connecting a calendar).
 - `src/app/dashboard` / `src/app/settings` — the UI. Both are behind `src/middleware.ts`,
   which checks the session cookie before allowing access.
 
@@ -126,12 +127,23 @@ npx vercel deploy --prod
 (or connect the GitHub repo in the Vercel dashboard and let it deploy on push). Make sure
 every variable above is set in the Vercel project first.
 
-**About the 5-minute sync schedule (`vercel.json`):** Vercel's free (Hobby) plan only
-runs cron jobs once a day; the 5-minute interval configured here needs a **Pro** plan. On
-Hobby, either change the schedule to `0 6 * * *` (once daily) or point a free external
-scheduler (e.g. [cron-job.org](https://cron-job.org) or a scheduled GitHub Actions
-workflow) at `GET https://YOUR_DOMAIN/api/cron/sync` every 5 minutes with the header
-`Authorization: Bearer YOUR_CRON_SECRET`.
+**About the sync schedule (`vercel.json`):** Vercel's free (Hobby) plan only runs cron
+jobs once a day, so `vercel.json` is set to `0 20 * * *` (20:00 UTC / 6am Sydney) as a
+once-daily safety net — that's the most a Hobby project can schedule on its own, and
+deploying with anything more frequent (e.g. `*/5 * * * *`) is exactly what throws the
+"limited to daily Cron Jobs" error. Adjust the hour to whatever "start of day" makes
+sense for your users; it only needs the two numbers changed (minute hour), e.g. `0 6 * * *`
+for 6am UTC.
+
+To actually get close-to-real-time clash alerts (checking every few minutes, which is
+the whole point of this app) on the free plan, add a **free external scheduler** that
+calls the same endpoint more often — the daily Vercel cron then just acts as a backup.
+[cron-job.org](https://cron-job.org) is the quickest: create a free account, add a new
+cron job hitting `GET https://YOUR_DOMAIN/api/cron/sync` every 5 minutes, and under
+"Advanced → Custom headers" add `Authorization: Bearer YOUR_CRON_SECRET` (the same value
+you set for `CRON_SECRET`). A scheduled GitHub Actions workflow works the same way if you
+prefer that. Upgrading to Vercel **Pro** and changing `vercel.json` back to
+`*/5 * * * *` is the other option if you'd rather not add a third-party scheduler.
 
 ## Local development
 
