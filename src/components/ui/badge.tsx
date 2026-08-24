@@ -8,7 +8,7 @@ const badgeVariants = cva("inline-flex items-center gap-1.5 rounded-full px-2.5 
       google: "bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-300",
       microsoft: "bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300",
       clash: "bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300",
-      neutral: "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300",
+      neutral: "bg-stone-100 text-stone-700 dark:bg-stone-800 dark:text-stone-300",
       success: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300",
     },
   },

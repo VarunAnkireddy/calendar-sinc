@@ -38,12 +38,12 @@ export default async function SettingsPage() {
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 py-8 sm:px-6">
-      <Link href="/dashboard" className="mb-6 inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">
+      <Link href="/dashboard" className="mb-6 inline-flex items-center gap-1.5 text-sm text-stone-500 hover:text-stone-700 dark:hover:text-stone-300">
         <ArrowLeft className="h-4 w-4" /> Back to dashboard
       </Link>
 
-      <h1 className="mb-1 text-2xl font-semibold text-slate-900 dark:text-slate-100">Settings</h1>
-      <p className="mb-6 text-sm text-slate-500 dark:text-slate-400">Signed in as {user.email}</p>
+      <h1 className="mb-1 text-2xl font-semibold text-stone-900 dark:text-stone-100">Settings</h1>
+      <p className="mb-6 text-sm text-stone-500 dark:text-stone-400">Signed in as {user.email}</p>
 
       <Card className="mb-4">
         <CardHeader>

@@ -14,10 +14,10 @@ export function ConnectPrompt({ connected }: { connected: string[] }) {
             <Sparkles className="h-4.5 w-4.5" />
           </div>
           <div>
-            <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+            <p className="text-sm font-semibold text-stone-900 dark:text-stone-100">
               Connect your other calendar
             </p>
-            <p className="text-sm text-slate-600 dark:text-slate-400">
+            <p className="text-sm text-stone-600 dark:text-stone-400">
               We can only catch clashes once both calendars are connected. Takes about 10 seconds.
             </p>
           </div>

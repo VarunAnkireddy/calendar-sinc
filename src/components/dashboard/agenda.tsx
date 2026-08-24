@@ -80,20 +80,20 @@ export function Agenda({
 
   if (calendarCount === 0) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 py-16 text-center dark:border-slate-700">
-        <CalendarX2 className="mb-3 h-8 w-8 text-slate-400" />
-        <p className="text-sm font-medium text-slate-700 dark:text-slate-300">No calendars connected yet</p>
-        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Connect Gmail or Outlook above to see your schedule here.</p>
+      <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-stone-300 py-16 text-center dark:border-stone-700">
+        <CalendarX2 className="mb-3 h-8 w-8 text-stone-400" />
+        <p className="text-sm font-medium text-stone-700 dark:text-stone-300">No calendars connected yet</p>
+        <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">Connect Gmail or Outlook above to see your schedule here.</p>
       </div>
     );
   }
 
   if (groups.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 py-16 text-center dark:border-slate-700">
-        <CalendarX2 className="mb-3 h-8 w-8 text-slate-400" />
-        <p className="text-sm font-medium text-slate-700 dark:text-slate-300">Nothing on the calendar</p>
-        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Nothing scheduled in the next 30 days.</p>
+      <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-stone-300 py-16 text-center dark:border-stone-700">
+        <CalendarX2 className="mb-3 h-8 w-8 text-stone-400" />
+        <p className="text-sm font-medium text-stone-700 dark:text-stone-300">Nothing on the calendar</p>
+        <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">Nothing scheduled in the next 30 days.</p>
       </div>
     );
   }
@@ -102,9 +102,12 @@ export function Agenda({
     <div className="space-y-8">
       {groups.map(([key, dayEvents]) => (
         <section key={key}>
-          <h2 className="mb-3 text-sm font-semibold text-slate-500 dark:text-slate-400">
-            {dayLabel(dayEvents[0].startDate)}
-          </h2>
+          <div className="mb-3 flex items-baseline gap-3">
+            <h2 className="text-sm font-semibold text-stone-700 dark:text-stone-300">
+              {dayLabel(dayEvents[0].startDate)}
+            </h2>
+            <div className="h-px flex-1 bg-stone-200 dark:bg-stone-800" />
+          </div>
           <div className="space-y-2">
             {dayEvents.map((e) => {
               const clash = clashIds.get(e.id);
@@ -112,23 +115,23 @@ export function Agenda({
                 <div
                   key={e.id}
                   className={cn(
-                    "flex items-start gap-3 rounded-xl border bg-white p-3.5 dark:bg-slate-900",
+                    "flex items-start gap-3 rounded-lg border border-l-4 bg-white p-3.5 dark:bg-stone-900",
                     clash
-                      ? "border-red-300 ring-1 ring-red-200 dark:border-red-800 dark:ring-red-900"
-                      : "border-slate-200 dark:border-slate-800"
+                      ? "border-stone-200 border-l-red-500 dark:border-stone-800 dark:border-l-red-500"
+                      : "border-stone-200 border-l-stone-200 dark:border-stone-800 dark:border-l-stone-800"
                   )}
                 >
-                  <div className="w-20 shrink-0 pt-0.5 text-right text-sm text-slate-500 dark:text-slate-400">
+                  <div className="tabular-nums w-20 shrink-0 pt-0.5 text-right text-sm text-stone-500 dark:text-stone-400">
                     {e.isAllDay ? "All day" : format(e.startDate, "h:mm a")}
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="font-medium text-slate-900 dark:text-slate-100">{e.title}</p>
+                      <p className="font-medium text-stone-900 dark:text-stone-100">{e.title}</p>
                       <Badge variant={providerBadgeVariant(e.provider)}>{providerLabel(e.provider)}</Badge>
                       {clash && <Badge variant="clash"><AlertTriangle className="h-3 w-3" /> Clash</Badge>}
                     </div>
                     {e.location && (
-                      <p className="mt-1 flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+                      <p className="mt-1 flex items-center gap-1 text-xs text-stone-500 dark:text-stone-400">
                         <MapPin className="h-3 w-3" /> {e.location}
                       </p>
                     )}

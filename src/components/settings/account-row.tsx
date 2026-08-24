@@ -46,7 +46,7 @@ export function AccountRow({
   }
 
   return (
-    <div className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 p-3.5 dark:border-slate-800">
+    <div className="flex items-center justify-between gap-3 rounded-xl border border-stone-200 p-3.5 dark:border-stone-800">
       <div className="min-w-0">
         <div className="flex items-center gap-2">
           <Badge variant={provider === "google" ? "google" : "microsoft"}>{label}</Badge>
@@ -60,8 +60,8 @@ export function AccountRow({
             </span>
           )}
         </div>
-        <p className="mt-1 truncate text-sm text-slate-600 dark:text-slate-400">{email}</p>
-        <p className="text-xs text-slate-400">Last synced {timeAgo(lastSyncedAt)}</p>
+        <p className="mt-1 truncate text-sm text-stone-600 dark:text-stone-400">{email}</p>
+        <p className="text-xs text-stone-400">Last synced {timeAgo(lastSyncedAt)}</p>
         {lastError && <p className="mt-1 text-xs text-red-500">{lastError}</p>}
       </div>
       <Button variant="outline" size="sm" onClick={disconnect} disabled={busy}>

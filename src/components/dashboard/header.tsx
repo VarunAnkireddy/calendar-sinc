@@ -22,7 +22,7 @@ function timeAgo(iso: string) {
 
 function typeAccent(type: string) {
   if (type === "clash") return "bg-red-500";
-  if (type === "cancelled") return "bg-slate-400";
+  if (type === "cancelled") return "bg-stone-400";
   return "bg-emerald-500";
 }
 
@@ -78,13 +78,13 @@ export function DashboardHeader({
   const list = data?.notifications ?? [];
 
   return (
-    <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80">
+    <header className="sticky top-0 z-20 border-b border-stone-200 bg-white/80 backdrop-blur dark:border-stone-800 dark:bg-stone-950/80">
       <div className="mx-auto flex w-full max-w-3xl items-center justify-between px-4 py-3 sm:px-6">
         <Link href="/dashboard" className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white">
             <CalendarClock className="h-4.5 w-4.5" />
           </div>
-          <span className="font-semibold text-slate-900 dark:text-slate-100">Calendar Sync</span>
+          <span className="font-semibold text-stone-900 dark:text-stone-100">Calendar Sync</span>
         </Link>
 
         <div className="flex items-center gap-1.5">
@@ -109,9 +109,9 @@ export function DashboardHeader({
             </Button>
 
             {open && (
-              <div className="absolute right-0 mt-2 w-80 max-w-[90vw] rounded-2xl border border-slate-200 bg-white p-2 shadow-lg dark:border-slate-800 dark:bg-slate-900">
+              <div className="absolute right-0 mt-2 w-80 max-w-[90vw] rounded-2xl border border-stone-200 bg-white p-2 shadow-lg dark:border-stone-800 dark:bg-stone-900">
                 <div className="flex items-center justify-between px-2 py-1.5">
-                  <span className="text-sm font-semibold text-slate-900 dark:text-slate-100">Notifications</span>
+                  <span className="text-sm font-semibold text-stone-900 dark:text-stone-100">Notifications</span>
                   {unreadCount > 0 && (
                     <button onClick={markAllRead} className="text-xs font-medium text-indigo-600 hover:underline dark:text-indigo-400">
                       Mark all read
@@ -120,21 +120,21 @@ export function DashboardHeader({
                 </div>
                 <div className="max-h-96 overflow-y-auto">
                   {list.length === 0 && (
-                    <p className="px-2 py-6 text-center text-sm text-slate-400">No notifications yet</p>
+                    <p className="px-2 py-6 text-center text-sm text-stone-400">No notifications yet</p>
                   )}
                   {list.map((n) => (
                     <div
                       key={n.id}
                       className={cn(
                         "flex gap-2.5 rounded-xl px-2 py-2.5 text-left",
-                        !n.read && "bg-slate-50 dark:bg-slate-800/60"
+                        !n.read && "bg-stone-50 dark:bg-stone-800/60"
                       )}
                     >
                       <span className={cn("mt-1.5 h-2 w-2 shrink-0 rounded-full", typeAccent(n.type))} />
                       <div className="min-w-0">
-                        <p className="text-sm font-medium text-slate-900 dark:text-slate-100">{n.title}</p>
-                        <p className="truncate text-xs text-slate-500 dark:text-slate-400">{n.message}</p>
-                        <p className="mt-0.5 text-[11px] text-slate-400">{timeAgo(n.createdAt)}</p>
+                        <p className="text-sm font-medium text-stone-900 dark:text-stone-100">{n.title}</p>
+                        <p className="truncate text-xs text-stone-500 dark:text-stone-400">{n.message}</p>
+                        <p className="mt-0.5 text-[11px] text-stone-400">{timeAgo(n.createdAt)}</p>
                       </div>
                     </div>
                   ))}
@@ -159,7 +159,7 @@ export function DashboardHeader({
             // eslint-disable-next-line @next/next/no-img-element
             <img src={user.image} alt="" className="ml-1 h-8 w-8 rounded-full" referrerPolicy="no-referrer" />
           ) : (
-            <div className="ml-1 flex h-8 w-8 items-center justify-center rounded-full bg-slate-200 text-xs font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+            <div className="ml-1 flex h-8 w-8 items-center justify-center rounded-full bg-stone-200 text-xs font-semibold text-stone-600 dark:bg-stone-800 dark:text-stone-300">
               {(user.name ?? user.email).slice(0, 1).toUpperCase()}
             </div>
           )}

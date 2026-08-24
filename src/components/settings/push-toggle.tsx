@@ -15,7 +15,7 @@ export function PushToggle({ vapidPublicKey }: { vapidPublicKey: string }) {
 
   if (!vapidPublicKey) {
     return (
-      <p className="text-sm text-slate-500 dark:text-slate-400">
+      <p className="text-sm text-stone-500 dark:text-stone-400">
         Push notifications aren&apos;t configured for this deployment yet — you&apos;ll still see alerts inside the app.
       </p>
     );
@@ -24,7 +24,7 @@ export function PushToggle({ vapidPublicKey }: { vapidPublicKey: string }) {
   if (state === "loading") return null;
 
   if (state === "unsupported") {
-    return <p className="text-sm text-slate-500 dark:text-slate-400">Your browser doesn&apos;t support push notifications. You&apos;ll still see alerts inside the app.</p>;
+    return <p className="text-sm text-stone-500 dark:text-stone-400">Your browser doesn&apos;t support push notifications. You&apos;ll still see alerts inside the app.</p>;
   }
 
   if (state === "granted") {
@@ -37,7 +37,7 @@ export function PushToggle({ vapidPublicKey }: { vapidPublicKey: string }) {
 
   if (state === "denied") {
     return (
-      <p className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+      <p className="flex items-center gap-2 text-sm text-stone-500 dark:text-stone-400">
         <BellOff className="h-4 w-4" /> Notifications are blocked in your browser settings. Enable them for this site to get alerts.
       </p>
     );
